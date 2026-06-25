@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ========= EDIT: SEO / social card ========= -->
+  <title>EgoCogNav: Cognition-aware Human Egocentric Navigation</title>
+  <meta name="description" content="EgoCogNav: Cognition-aware Human Egocentric Navigation. ECCV 2026.">
+  <meta property="og:title" content="EgoCogNav: Cognition-aware Human Egocentric Navigation"/>
+  <meta property="og:description" content="ECCV 2026 project page."/>
+  <meta property="og:image" content="static/images/teaser.png"/>
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts + icons (CDN, no local install needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <style>
+    :root{
+      --ink:#1a1a1a;
+      --link:#3273dc;          /* author / link blue */
+      --hl:#a07c4a;            /* keyword highlight (warm brown) — change to recolor */
+      --btn:#363636;           /* button dark gray */
+      --max:980px;            /* content max width */
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0; color:var(--ink);
+      font-family:'Lato', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      line-height:1.65; background:#fff;
+    }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 1.5rem; }
+
+    /* ---------- HERO ---------- */
+    .hero{ text-align:center; padding:3.2rem 0 1.5rem; }
+    .pub-title{
+      font-weight:900; font-size:2.6rem; line-height:1.15;
+      margin:0 0 1.4rem;
+    }
+    .authors{ font-size:1.15rem; line-height:2; }
+    .authors a{ font-weight:700; }
+    .affil{ margin-top:0.6rem; font-size:1rem; }
+    .note{ margin-top:0.2rem; font-size:0.95rem; color:#444; }
+
+    /* ---------- buttons ---------- */
+    .links{ margin-top:1.6rem; display:flex; gap:0.7rem; justify-content:center; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:var(--btn); color:#fff !important; border-radius:999px;
+      padding:0.55rem 1.3rem; font-weight:700; font-size:1rem;
+      transition:transform .12s ease, opacity .12s ease;
+    }
+    .btn:hover{ transform:translateY(-2px); text-decoration:none; opacity:0.92; }
+
+    /* ---------- featured video ---------- */
+    .feature{ padding:1.5rem 0 0; }
+    .feature video, .feature img{
+      width:100%; border-radius:6px; background:#000;
+      box-shadow:0 4px 22px rgba(0,0,0,0.10);
+    }
+    .feature .caption{
+      margin-top:1.1rem; font-size:1.05rem; text-align:left; color:#222;
+    }
+    .caption .lead{ font-weight:900; }
+    .hl{ color:var(--hl); font-weight:700; }   /* keyword highlight */
+
+    /* ---------- sections ---------- */
+    section.block{ padding:2.6rem 0; }
+    .sec-title{
+      font-weight:900; font-size:2rem; text-align:left;
+      margin:0 0 1.4rem;
+    }
+    .content p{ text-align:justify; }
+
+    /* ---------- image grid ---------- */
+    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; }
+    .grid3 img{ width:100%; border-radius:6px; background:#f3f3f3; }
+    @media (max-width:680px){ .grid3{ grid-template-columns:1fr; } .pub-title{ font-size:2rem; } }
+
+    figure{ margin:0; }
+    figcaption{ font-size:0.92rem; color:#666; margin-top:0.6rem; text-align:center; }
+
+    /* ---------- bibtex ---------- */
+    pre.bib{
+      background:#f5f5f5; border-radius:8px; padding:1.2rem;
+      font-size:0.85rem; overflow-x:auto; text-align:left;
+    }
+
+    footer{ padding:2.2rem 0; border-top:1px solid #eee; text-align:center; color:#999; font-size:0.85rem; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="wrap">
+      <h1 class="pub-title">EgoCogNav: Cognition-aware Human Egocentric Navigation</h1>
+
+      <!-- ========= EDIT: authors =========
+           superscript numbers map to the affiliations below;
+           * = equal contribution; † = corresponding / data contact -->
+      <div class="authors">
+        <a href="#">Author One</a><sup>1,2</sup> *,
+        <a href="#">Author Two</a><sup>2</sup>,
+        <a href="#">Author Three</a><sup>1</sup>,
+        <a href="#">Author Four</a><sup>2</sup> &dagger;
+      </div>
+
+      <div class="affil">
+        <sup>1</sup> Affiliation One &nbsp;&nbsp; <sup>2</sup> Affiliation Two
+      </div>
+      <div class="note">* Footnote, e.g. equal contribution.</div>
+      <div class="note">&dagger; Footnote, e.g. please contact XXX for the full dataset.</div>
+
+      <!-- ========= Link buttons: replace href with real links; delete unused ones ========= -->
+      <div class="links">
+        <a class="btn" href="#"><i class="fas fa-file-pdf"></i> Paper</a>
+        <a class="btn" href="#"><i class="ai ai-arxiv"></i> arXiv</a>
+        <a class="btn" href="#"><i class="fas fa-database"></i> Data</a>
+        <a class="btn" href="#"><i class="fab fa-github"></i> Code</a>
+        <a class="btn" href="#"><i class="fab fa-youtube"></i> Video</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Featured video + highlighted caption ================= -->
+  <div class="feature">
+    <div class="wrap">
+      <!-- Put the video at static/videos/overview.mp4. No video yet?
+           Replace the whole <video>...</video> block with: <img src="static/images/teaser.png"> -->
+      <video controls muted loop playsinline poster="static/images/teaser.png">
+        <source src="static/videos/overview.mp4" type="video/mp4">
+      </video>
+
+      <!-- ========= EDIT: bold lead-in + highlight key terms with <span class="hl"> ========= -->
+      <p class="caption">
+        <span class="lead">Overview of EgoCogNav.</span>
+        EgoCogNav studies <span class="hl">cognition-aware</span>
+        <span class="hl">egocentric navigation</span> ... (replace this with a one-line
+        summary, and wrap the terms you want to emphasize, e.g. dataset size or method names.)
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= OVERVIEW (image grid) ================= -->
+  <section class="block">
+    <div class="wrap">
+      <h2 class="sec-title">Overview</h2>
+      <div class="grid3">
+        <!-- Put images under static/images/; missing files show a gray placeholder -->
+        <img src="static/images/fig1.png" alt="fig1" onerror="this.alt='static/images/fig1.png'">
+        <img src="static/images/fig2.png" alt="fig2" onerror="this.alt='static/images/fig2.png'">
+        <img src="static/images/fig3.png" alt="fig3" onerror="this.alt='static/images/fig3.png'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABSTRACT ================= -->
+  <section class="block">
+    <div class="wrap content">
+      <h2 class="sec-title">Abstract</h2>
+      <!-- ========= EDIT: paste the paper abstract ========= -->
+      <p>[Paste the camera-ready abstract here.]</p>
+    </div>
+  </section>
+
+  <!-- ================= METHOD ================= -->
+  <section class="block">
+    <div class="wrap content">
+      <h2 class="sec-title">Method</h2>
+      <figure style="margin-bottom:1.2rem;">
+        <img src="static/images/pipeline.png" alt="pipeline" style="width:100%;border-radius:6px;"
+             onerror="this.alt='static/images/pipeline.png'">
+        <figcaption>Overview of the EgoCogNav pipeline.</figcaption>
+      </figure>
+      <p>[2-4 paragraphs describing the method, with the pipeline figure above.]</p>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="block">
+    <div class="wrap content">
+      <h2 class="sec-title">Results</h2>
+      <figure style="margin-bottom:1.2rem;">
+        <img src="static/images/results.png" alt="results" style="width:100%;border-radius:6px;"
+             onerror="this.alt='static/images/results.png'">
+        <figcaption>Qualitative / quantitative results.</figcaption>
+      </figure>
+      <p>[Quantitative tables and qualitative visualizations go here.]</p>
+    </div>
+  </section>
+
+  <!-- ================= BIBTEX ================= -->
+  <section class="block">
+    <div class="wrap">
+      <h2 class="sec-title">BibTeX</h2>
+<pre class="bib">@inproceedings{egocognav2026,
+  title     = {EgoCogNav: Cognition-aware Human Egocentric Navigation},
+  author    = {Real Author and Second Author and Third Author},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</pre>
+    </div>
+  </section>
+
+  <!-- ================= ACK ================= -->
+  <section class="block">
+    <div class="wrap content">
+      <h2 class="sec-title" style="font-size:1.5rem;">Acknowledgements</h2>
+      <p>[Acknowledgements, grant numbers, etc.]</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Page template adapted from
+      <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>.
+    </div>
+  </footer>
+
+</body>
+</html>
