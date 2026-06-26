@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Raw, uncompressed source videos — too large for GitHub (100 MB/file limit).
+# The web page serves the compressed static/videos/*.mp4 instead.
+static/videos/1/
+static/videos/2/
+static/videos/3/
+static/videos/4/
+*.mov

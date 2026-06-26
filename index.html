@@ -6,10 +6,10 @@
 
   <!-- ========= EDIT: SEO / social card ========= -->
   <title>EgoCogNav: Cognition-aware Human Egocentric Navigation</title>
-  <meta name="description" content="EgoCogNav: Cognition-aware Human Egocentric Navigation. ECCV 2026.">
+  <meta name="description" content="EgoCogNav: a multimodal egocentric navigation framework that jointly forecasts perceived path uncertainty, trajectories, and head motion from egocentric video, gaze, and motion history. ECCV 2026.">
   <meta property="og:title" content="EgoCogNav: Cognition-aware Human Egocentric Navigation"/>
   <meta property="og:description" content="ECCV 2026 project page."/>
-  <meta property="og:image" content="static/images/teaser.png"/>
+  <meta property="og:image" content="static/images/diagram_1.jpg"/>
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts + icons (CDN, no local install needed) -->
@@ -22,9 +22,13 @@
     :root{
       --ink:#1a1a1a;
       --link:#3273dc;          /* author / link blue */
-      --hl:#a07c4a;            /* keyword highlight (warm brown) — change to recolor */
+      --hl:#6366f1;            /* keyword highlight (indigo) — change to recolor */
       --btn:#363636;           /* button dark gray */
       --max:980px;            /* content max width */
+      /* tech gradient palette: cyan → indigo → fuchsia */
+      --g1:#22d3ee;
+      --g2:#6366f1;
+      --g3:#d946ef;
     }
     *{ box-sizing:border-box; }
     body{
@@ -37,31 +41,115 @@
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 1.5rem; }
 
     /* ---------- HERO ---------- */
-    .hero{ text-align:center; padding:3.2rem 0 1.5rem; }
-    .pub-title{
-      font-weight:900; font-size:2.6rem; line-height:1.15;
-      margin:0 0 1.4rem;
+    .hero{ position:relative; overflow:hidden; text-align:center; padding:3.6rem 0 1.5rem; }
+    .hero .wrap{ position:relative; z-index:2; }
+    /* soft glow behind the title */
+    .hero::before{
+      content:""; position:absolute; left:50%; top:-200px; transform:translateX(-50%);
+      width:920px; height:520px; max-width:140vw; z-index:0; pointer-events:none;
+      background:radial-gradient(50% 50% at 50% 50%,
+        rgba(99,102,241,0.20), rgba(34,211,238,0.12) 45%, transparent 72%);
+      filter:blur(8px);
     }
+    /* faint tech grid that fades out toward the edges */
+    .hero::after{
+      content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(20,30,80,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,30,80,0.06) 1px, transparent 1px);
+      background-size:34px 34px;
+      -webkit-mask-image:radial-gradient(72% 62% at 50% 28%, #000 28%, transparent 76%);
+      mask-image:radial-gradient(72% 62% at 50% 28%, #000 28%, transparent 76%);
+    }
+    .pub-title{
+      font-weight:900; font-size:2.7rem; line-height:1.15;
+      letter-spacing:-0.01em; margin:0 0 1.4rem;
+    }
+    /* animated gradient keyword */
+    .grad{
+      background:linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g1));
+      background-size:300% 100%;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+      animation:gradShift 8s linear infinite;
+    }
+    @keyframes gradShift{ to{ background-position:300% 0; } }
+    @media (prefers-reduced-motion:reduce){ .grad{ animation:none; } }
     .authors{ font-size:1.15rem; line-height:2; }
     .authors a{ font-weight:700; }
     .affil{ margin-top:0.6rem; font-size:1rem; }
+    .venue{
+      margin-top:0.9rem; font-weight:800; font-size:1.08rem; letter-spacing:0.005em;
+      background:linear-gradient(90deg, var(--g2), var(--g3));
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:var(--g2);
+    }
     .note{ margin-top:0.2rem; font-size:0.95rem; color:#444; }
 
     /* ---------- buttons ---------- */
-    .links{ margin-top:1.6rem; display:flex; gap:0.7rem; justify-content:center; flex-wrap:wrap; }
+    .links{ margin-top:1.8rem; display:flex; gap:0.7rem; justify-content:center; flex-wrap:wrap; }
     .btn{
       display:inline-flex; align-items:center; gap:0.5rem;
-      background:var(--btn); color:#fff !important; border-radius:999px;
-      padding:0.55rem 1.3rem; font-weight:700; font-size:1rem;
-      transition:transform .12s ease, opacity .12s ease;
+      background:linear-gradient(135deg, #2c2c2e, #161618);
+      color:#fff !important; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.10);
+      padding:0.55rem 1.35rem; font-weight:700; font-size:1rem;
+      box-shadow:0 2px 10px rgba(0,0,0,0.14);
+      transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease;
     }
-    .btn:hover{ transform:translateY(-2px); text-decoration:none; opacity:0.92; }
+    .btn:hover{
+      transform:translateY(-2px); text-decoration:none;
+      border-color:rgba(99,102,241,0.55);
+      box-shadow:0 8px 24px rgba(99,102,241,0.32);
+    }
+    /* disabled "coming soon" buttons */
+    .btn.soon{
+      background:#ececf1; color:#9a9aa6 !important;
+      border-color:#e3e3ea; box-shadow:none; cursor:not-allowed;
+    }
+    .btn.soon em{
+      font-style:normal; font-size:0.7rem; font-weight:800; letter-spacing:0.04em;
+      text-transform:uppercase; padding:0.05rem 0.45rem; border-radius:999px;
+      background:rgba(0,0,0,0.07);
+    }
 
-    /* ---------- featured video ---------- */
+    /* ---------- featured image / video ---------- */
     .feature{ padding:1.5rem 0 0; }
     .feature video, .feature img{
       width:100%; border-radius:6px; background:#000;
       box-shadow:0 4px 22px rgba(0,0,0,0.10);
+    }
+
+    /* reserved 16:9 video window (placeholder until the real video is added) */
+    .video-box{
+      position:relative; width:100%; aspect-ratio:16/9;
+      border-radius:6px; overflow:hidden; background:#111;
+      box-shadow:0 4px 22px rgba(0,0,0,0.10);
+    }
+    .video-box video, .video-box iframe{
+      position:absolute; inset:0; width:100%; height:100%; border:0;
+    }
+    .video-placeholder{
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:0.7rem; color:#b9b9b9;
+      background-image:repeating-linear-gradient(45deg,#171717 0 14px,#141414 14px 28px);
+    }
+    .video-placeholder i{ font-size:3rem; opacity:0.85; }
+    .video-placeholder span{ font-size:1.05rem; letter-spacing:0.02em; }
+
+    /* row of clips, tightly packed, muted autoplay loop */
+    .video-row{
+      display:flex; gap:4px; width:100%; overflow:hidden;
+      border-radius:8px; background:#000;
+      box-shadow:0 4px 22px rgba(0,0,0,0.10);
+    }
+    .video-row video{
+      flex:1 1 0; min-width:0; aspect-ratio:1/1;
+      object-fit:cover; display:block; background:#000;
+    }
+    @media (max-width:680px){
+      .video-row{ flex-wrap:wrap; }
+      .video-row video{ flex-basis:calc(50% - 2px); }
     }
     .feature .caption{
       margin-top:1.1rem; font-size:1.05rem; text-align:left; color:#222;
@@ -76,14 +164,27 @@
       margin:0 0 1.4rem;
     }
     .content p{ text-align:justify; }
+    .keywords{ font-size:0.98rem; color:#444; margin-top:1rem; }
+    .keywords strong{ color:var(--ink); }
 
-    /* ---------- image grid ---------- */
-    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; }
-    .grid3 img{ width:100%; border-radius:6px; background:#f3f3f3; }
-    @media (max-width:680px){ .grid3{ grid-template-columns:1fr; } .pub-title{ font-size:2rem; } }
+    /* ---------- dataset / metric stat strip ---------- */
+    .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0.8rem; margin:1.6rem 0 0; }
+    .stat{
+      text-align:center; padding:1.1rem 0.6rem; border-radius:14px;
+      border:1px solid #ececf3; background:linear-gradient(180deg,#fbfbfe,#f3f4fb);
+    }
+    .stat .num{
+      font-weight:900; font-size:2rem; line-height:1;
+      background:linear-gradient(90deg, var(--g1), var(--g2), var(--g3));
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+    }
+    .stat .lab{ margin-top:0.45rem; font-size:0.9rem; color:#555; }
+    @media (max-width:680px){ .stats{ grid-template-columns:repeat(2,1fr); } }
 
     figure{ margin:0; }
     figcaption{ font-size:0.92rem; color:#666; margin-top:0.6rem; text-align:center; }
+    .subhead{ font-weight:900; font-size:1.35rem; margin:2rem 0 1rem; }
 
     /* ---------- bibtex ---------- */
     pre.bib{
@@ -100,73 +201,90 @@
   <!-- ================= HERO ================= -->
   <div class="hero">
     <div class="wrap">
-      <h1 class="pub-title">EgoCogNav: Cognition-aware Human Egocentric Navigation</h1>
+      <h1 class="pub-title"><span class="grad">EgoCogNav</span>: Cognition-aware Human Egocentric Navigation</h1>
 
-      <!-- ========= EDIT: authors =========
-           superscript numbers map to the affiliations below;
-           * = equal contribution; † = corresponding / data contact -->
+      <!-- superscript numbers map to the affiliations below -->
       <div class="authors">
-        <a href="#">Author One</a><sup>1,2</sup> *,
-        <a href="#">Author Two</a><sup>2</sup>,
-        <a href="#">Author Three</a><sup>1</sup>,
-        <a href="#">Author Four</a><sup>2</sup> &dagger;
+        <a href="#">Zhiwen Qiu</a><sup>1</sup>,
+        <a href="#">Ziang Liu</a><sup>1</sup>,
+        <a href="#">Wenqian Niu</a><sup>2</sup>,
+        <a href="#">Tapomayukh Bhattacharjee</a><sup>1</sup>,
+        <a href="#">Saleh Kalantari</a><sup>1</sup>
       </div>
 
       <div class="affil">
-        <sup>1</sup> Affiliation One &nbsp;&nbsp; <sup>2</sup> Affiliation Two
+        <sup>1</sup> Cornell University &nbsp;&nbsp; <sup>2</sup> Georgia Institute of Technology
       </div>
-      <div class="note">* Footnote, e.g. equal contribution.</div>
-      <div class="note">&dagger; Footnote, e.g. please contact XXX for the full dataset.</div>
+      <div class="venue">European Conference on Computer Vision (ECCV) 2026</div>
 
-      <!-- ========= Link buttons: replace href with real links; delete unused ones ========= -->
+      <!-- ========= Link buttons: replace href="#" with real URLs; delete any that don't exist ========= -->
       <div class="links">
-        <a class="btn" href="#"><i class="fas fa-file-pdf"></i> Paper</a>
+        <!-- arXiv is the only live link for now — replace href="#" with the real arXiv URL -->
         <a class="btn" href="#"><i class="ai ai-arxiv"></i> arXiv</a>
-        <a class="btn" href="#"><i class="fas fa-database"></i> Data</a>
-        <a class="btn" href="#"><i class="fab fa-github"></i> Code</a>
-        <a class="btn" href="#"><i class="fab fa-youtube"></i> Video</a>
+        <!-- not released yet → disabled "soon" placeholders; turn each back into an <a class="btn" href="..."> when ready -->
+        <span class="btn soon"><i class="fas fa-file-pdf"></i> Paper <em>soon</em></span>
+        <span class="btn soon"><i class="fas fa-database"></i> Data <em>soon</em></span>
+        <span class="btn soon"><i class="fab fa-github"></i> Code <em>soon</em></span>
+        <span class="btn soon"><i class="fab fa-youtube"></i> Video <em>soon</em></span>
       </div>
     </div>
   </div>
 
-  <!-- ================= Featured video + highlighted caption ================= -->
+  <!-- ================= Featured video (placeholder — swap in real video later) ================= -->
   <div class="feature">
     <div class="wrap">
-      <!-- Put the video at static/videos/overview.mp4. No video yet?
-           Replace the whole <video>...</video> block with: <img src="static/images/teaser.png"> -->
-      <video controls muted loop playsinline poster="static/images/teaser.png">
-        <source src="static/videos/overview.mp4" type="video/mp4">
-      </video>
+      <!-- 4 egocentric clips (720x720), tightly packed in a row, muted autoplay loop.
+           Sources are web-compressed mp4 (~3.6 MB each, from the 177 MB .mov originals).
+           The raw .mov files under static/videos/{1..4}/ are git-ignored (too large for GitHub Pages). -->
+      <div class="video-row">
+        <video src="static/videos/1.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video src="static/videos/2.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video src="static/videos/3.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video src="static/videos/4.mp4" autoplay muted loop playsinline preload="auto"></video>
+      </div>
+    </div>
+  </div>
 
-      <!-- ========= EDIT: bold lead-in + highlight key terms with <span class="hl"> ========= -->
+  <!-- ================= Featured teaser + highlighted caption ================= -->
+  <div class="feature">
+    <div class="wrap">
+      <img src="static/images/diagram_1.jpg" alt="EgoCogNav teaser: past, present and future egocentric navigation">
+
       <p class="caption">
         <span class="lead">Overview of EgoCogNav.</span>
-        EgoCogNav studies <span class="hl">cognition-aware</span>
-        <span class="hl">egocentric navigation</span> ... (replace this with a one-line
-        summary, and wrap the terms you want to emphasize, e.g. dataset size or method names.)
+        Given a past window of <span class="hl">egocentric video, motion, head rotations, gaze,
+        and a navigational goal</span>, EgoCogNav jointly forecasts a future
+        <span class="hl">body-frame trajectory</span>, <span class="hl">head poses</span>, and the
+        current state of <span class="hl">perceived path uncertainty</span> &mdash; reproducing
+        human-like behaviors such as scanning, hesitation, and backtracking, and generalizing to
+        unseen environments.
       </p>
     </div>
   </div>
-
-  <!-- ================= OVERVIEW (image grid) ================= -->
-  <section class="block">
-    <div class="wrap">
-      <h2 class="sec-title">Overview</h2>
-      <div class="grid3">
-        <!-- Put images under static/images/; missing files show a gray placeholder -->
-        <img src="static/images/fig1.png" alt="fig1" onerror="this.alt='static/images/fig1.png'">
-        <img src="static/images/fig2.png" alt="fig2" onerror="this.alt='static/images/fig2.png'">
-        <img src="static/images/fig3.png" alt="fig3" onerror="this.alt='static/images/fig3.png'">
-      </div>
-    </div>
-  </section>
 
   <!-- ================= ABSTRACT ================= -->
   <section class="block">
     <div class="wrap content">
       <h2 class="sec-title">Abstract</h2>
-      <!-- ========= EDIT: paste the paper abstract ========= -->
-      <p>[Paste the camera-ready abstract here.]</p>
+      <p>
+        Modeling the cognitive and experiential factors of human navigation is central to
+        deepening our understanding of human&ndash;environment interaction and to enabling
+        safe social navigation and effective assistive wayfinding. Most existing methods
+        focus on forecasting motions in fully observed scenes and often neglect human factors
+        that capture how people feel and respond to space. To address this gap, we propose
+        EgoCogNav, a multimodal egocentric navigation framework that jointly forecasts
+        perceived path uncertainty, trajectories and head motion from egocentric video, gaze,
+        and motion history. To facilitate research in the field, we introduce the
+        Cognition-aware Egocentric Navigation (CEN) dataset consisting of 6-hours of
+        real-world egocentric recordings capturing diverse navigation behaviors in real-world
+        scenarios. Experiments show that EgoCogNav learns the perceived uncertainty that
+        highly correlates with human-like behaviors such as scanning, hesitation, and
+        backtracking while generalizing to unseen environments.
+      </p>
+      <p class="keywords">
+        <strong>Keywords:</strong> Egocentric Navigation &middot; Trajectory Prediction &middot;
+        Perceived Uncertainty &middot; Multimodal Learning
+      </p>
     </div>
   </section>
 
@@ -175,11 +293,64 @@
     <div class="wrap content">
       <h2 class="sec-title">Method</h2>
       <figure style="margin-bottom:1.2rem;">
-        <img src="static/images/pipeline.png" alt="pipeline" style="width:100%;border-radius:6px;"
-             onerror="this.alt='static/images/pipeline.png'">
-        <figcaption>Overview of the EgoCogNav pipeline.</figcaption>
+        <img src="static/images/EgoCogNav_Architecture.jpg" alt="EgoCogNav architecture"
+             style="width:100%;border-radius:6px;">
+        <figcaption>
+          EgoCogNav architecture. Perception and action streams are encoded independently with
+          self-attention and fused by late concatenation; a cognition module predicts perceived
+          uncertainty, retrieves context from learnable memory, and conditions decoding to
+          forecast trajectory and head motion.
+        </figcaption>
       </figure>
-      <p>[2-4 paragraphs describing the method, with the pipeline figure above.]</p>
+      <p>
+        EgoCogNav is organized into three modules. A <strong>perception module</strong> extracts
+        spatio-temporal features from the recent RGB frames with a frozen, pre-trained DINOv2
+        vision transformer. An <strong>action module</strong> encodes the past body-frame motion,
+        6D head rotations, and gaze, together with the body-frame navigation goal. The two streams
+        are encoded independently with self-attention and fused by late concatenation into a
+        shared representation.
+      </p>
+      <p>
+        A <strong>cognition module</strong> sits at the core. It (i) predicts the current
+        perceived uncertainty from the shared features, whose supervision is gradient-coupled back
+        through the encoder; (ii) retrieves situation-relevant context from a small set (16) of
+        learnable navigation memory patterns via cross-attention; and (iii) applies
+        uncertainty-conditioned decoding (UCD), modulating the latent representation through the
+        predicted uncertainty with adaptive layer normalization. Two heads then forecast a 3-DOF
+        body-frame trajectory and a 6D head-motion sequence, alongside a cognition head that
+        estimates perceived uncertainty.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= DATASET ================= -->
+  <section class="block">
+    <div class="wrap content">
+      <h2 class="sec-title">CEN Dataset</h2>
+      <p>
+        To support cognition-aware navigation research, we collect the
+        <strong>Cognition-aware Egocentric Navigation (CEN)</strong> dataset &mdash; a multimodal
+        egocentric corpus pairing rich sensory streams with moment-to-moment, self-reported
+        annotations of perceived path uncertainty.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><div class="num">6 h</div><div class="lab">of recordings</div></div>
+        <div class="stat"><div class="num">17</div><div class="lab">participants</div></div>
+        <div class="stat"><div class="num">42</div><div class="lab">distinct sites</div></div>
+        <div class="stat"><div class="num">226K</div><div class="lab">RGB frames</div></div>
+      </div>
+
+      <p style="margin-top:1.5rem;">
+        Recordings span diverse indoor and outdoor settings &mdash; university campuses,
+        healthcare facilities, urban commercial streets, and natural routes &mdash; captured with
+        <strong>Tobii Pro Glasses</strong> plus GPS outdoors and <strong>Project Aria glasses</strong>
+        (with SLAM) indoors, while participants continuously self-report perceived uncertainty on a
+        normalized [0,&nbsp;1] scale. Every session is annotated with environment types (junctions,
+        occlusion, multi-level transitions, crowds, spatial changes) and trajectory / head-movement
+        behaviors (hesitation, wrong turn, backtrack; scanning, confirmation, look-back). All data
+        is de-identified by blurring faces and removing audio.
+      </p>
     </div>
   </section>
 
@@ -187,12 +358,37 @@
   <section class="block">
     <div class="wrap content">
       <h2 class="sec-title">Results</h2>
-      <figure style="margin-bottom:1.2rem;">
-        <img src="static/images/results.png" alt="results" style="width:100%;border-radius:6px;"
-             onerror="this.alt='static/images/results.png'">
-        <figcaption>Qualitative / quantitative results.</figcaption>
+      <p>
+        On a held-out test set of <strong>environments unseen during training</strong>, EgoCogNav
+        achieves the best trajectory and head-motion accuracy, reducing ADE / FDE by
+        <strong>3.8% / 5.0%</strong> relative to the strongest baseline. More importantly, its
+        learned perceived uncertainty correlates strongly with human ratings (Spearman
+        <strong>&rho;&nbsp;=&nbsp;0.788</strong>), far surpassing hand-crafted entropy- and
+        heuristic-based proxies (&rho;&nbsp;=&nbsp;0.08 and 0.20). Qualitatively, uncertainty rises
+        before hesitation and scanning at multi-junctions and peaks before backtracking under
+        occlusion, while staying low in clear, well-specified corridors.
+      </p>
+      <figure style="margin:1.6rem 0 1.2rem;">
+        <img src="static/images/qual.jpg" alt="qualitative results"
+             style="width:100%;border-radius:6px;">
+        <figcaption>
+          Qualitative visualizations. For each scenario, a bird&rsquo;s-eye-view overlay shows the
+          past trajectory (gray), ground-truth and predicted futures, and overlaid path uncertainty;
+          the time-aligned egocentric frames (t+1 to t+3s) show ground-truth (red) vs. predicted
+          (green) head positions, with predicted uncertainty intensity color-coded.
+        </figcaption>
       </figure>
-      <p>[Quantitative tables and qualitative visualizations go here.]</p>
+
+      <h3 class="subhead">Failure Cases</h3>
+      <figure style="margin-bottom:1.2rem;">
+        <img src="static/images/failure_h.jpg" alt="failure cases"
+             style="width:100%;border-radius:6px;">
+        <figcaption>
+          Two failure cases highlighting limits in long-horizon scene memory: the model predicts a
+          return along the same segment instead of backtracking to an earlier decision point, and
+          misses a brief hesitation / look-back triggered by changing scene context.
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -202,7 +398,7 @@
       <h2 class="sec-title">BibTeX</h2>
 <pre class="bib">@inproceedings{egocognav2026,
   title     = {EgoCogNav: Cognition-aware Human Egocentric Navigation},
-  author    = {Real Author and Second Author and Third Author},
+  author    = {Qiu, Zhiwen and Liu, Ziang and Niu, Wenqian and Bhattacharjee, Tapomayukh and Kalantari, Saleh},
   booktitle = {European Conference on Computer Vision (ECCV)},
   year      = {2026}
 }</pre>
@@ -223,6 +419,30 @@
       <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>.
     </div>
   </footer>
+
+  <!-- Force muted autoplay across browsers (HTML autoplay alone is sometimes blocked) -->
+  <script>
+    (function () {
+      function startVideos() {
+        document.querySelectorAll('.video-row video').forEach(function (v) {
+          v.muted = true;        // set as a property, not just the attribute — needed for autoplay
+          v.defaultMuted = true;
+          v.playsInline = true;
+          var p = v.play();
+          if (p && p.catch) { p.catch(function () { /* retried on the events below */ }); }
+        });
+      }
+      document.addEventListener('DOMContentLoaded', startVideos);
+      window.addEventListener('load', startVideos);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) startVideos();
+      });
+      // last-resort fallback: kick off on the first user interaction
+      ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (evt) {
+        window.addEventListener(evt, startVideos, { once: true, passive: true });
+      });
+    })();
+  </script>
 
 </body>
 </html>
