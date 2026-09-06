@@ -115,6 +115,8 @@
 
     /* ---------- featured image / video ---------- */
     .feature{ padding:1.5rem 0 0; }
+    .feature .player{ position:relative; width:100%; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#000; }
+    .feature .player iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
     .feature video, .feature img{
       width:100%; border-radius:6px; background:#000;
       box-shadow:0 4px 22px rgba(0,0,0,0.10);
@@ -227,6 +229,16 @@
   </div>
 
   <!-- ================= Featured video (placeholder — swap in real video later) ================= -->
+  <div class="feature">
+    <div class="wrap">
+      <div class="player">
+        <iframe src="https://www.youtube-nocookie.com/embed/r4pgsaSng18" title="EgoCogNav video"
+                loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
   <div class="feature">
     <div class="wrap">
       <!-- 4 egocentric clips combined into a single 1x4 strip (1920x480 = 4x 480x480 cells),
